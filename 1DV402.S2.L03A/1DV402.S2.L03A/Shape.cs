@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _1DV402.S2.L03A
 {
-    public enum ShapeType { Ellipse, Rectangle }
+    public enum ShapeType { Indefinite, Ellipse, Rectangle };
 
     public abstract class Shape
     {
