@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace _1DV402.S2.L03A
 {
+    /// <summary>
+    /// Class which implements the abstract properties (Area and Perimeter) in the base class (Shape)
+    /// in order to instantiate Ellipse-objects with its specific Area and Perimeter calculations.
+    /// </summary>
     public class Ellipse : Shape
     {
         public override double Area

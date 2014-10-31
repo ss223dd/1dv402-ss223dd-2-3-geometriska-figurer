@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace _1DV402.S2.L03A
 {
+    // Enum type defining which type of shapes the application can handle.
     public enum ShapeType { Indefinite, Ellipse, Rectangle };
 
+    /// <summary>
+    /// Base class containing members which are mutual to Ellipses and Rectangles, including a string representation of an instance's value used in the final presentation.
+    /// </summary>
     public abstract class Shape
     {
         private double _length;
@@ -51,7 +55,7 @@ namespace _1DV402.S2.L03A
 
         public override string ToString()
         {
-            return (string.Format("Längd  :\t{0}\nBredd  :\t{1}\nOmkrets:\t{2}\nArea   :\t{3}", _length, _width, Perimeter, Area));
+            return (string.Format("Längd  :\t{0:0.00}\nBredd  :\t{1:0.00}\nOmkrets:\t{2:0.0}\nArea   :\t{3:0.0}", Length, Width, Perimeter, Area));
         }
     }
 }

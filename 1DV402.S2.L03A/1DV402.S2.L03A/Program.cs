@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace _1DV402.S2.L03A
 {
+    /// <summary>
+    /// The class presents a menu with shape options, prompts the user for shape values, presents any potential error messages upon input, 
+    /// instantiates the shape object as well as presents the shape's final details.
+    /// </summary>
     class Program
     {
-        // Method which calls the ViewMenu method in order to show the menu, if the user doesn't chose to exit the app the method should call the CreateShape method which
-        // creates and returns a reference of either an Ellips- or a Rectangle-object. The reference in turn is being used in the call of the ViewDetail method which presents
-        // the object's details. When a calculation/presentation has been made the menu should be shown once again.
-
-        // The menu options are numbered from 0-2 and if the user doesn't chose an option within its interval an error message should be presented and the user is prompted 
-        // to press any key to be able to make a valid option.
         private static void Main(string[] args)
         {
             Console.Title = "Geometriska Figurer - Nivå A";
@@ -43,14 +41,17 @@ namespace _1DV402.S2.L03A
                             shapeType = ShapeType.Rectangle;
                             break;
                     }
-
+                    
                     Shape shape = CreateShape(shapeType);
-                    // ViewShapeDetail();
+                    ViewShapeDetail(shape);
                 }
-
-                Console.BackgroundColor = ConsoleColor.Red;
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("\n FEL! Ange ett nummer mellan 0 och 2.\n");
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\n FEL! Ange ett nummer mellan 0 och 2.\n");
+                }
+                
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("   Tryck tangent för att fortsätta   ");
@@ -59,23 +60,36 @@ namespace _1DV402.S2.L03A
                 Console.ReadKey(true);
                 Console.Clear();
                 Console.CursorVisible = true;
-
             } while (!exit);
         }
 
-        // Method which reads/gets a shape's length and width, instansiates the object and returns a reference to it.
         private static Shape CreateShape(ShapeType shapeType)
         {
-            double length = ReadDoubleGreaterThanZero("\nAnge längden: ");
-            double width = ReadDoubleGreaterThanZero("\nAnge bredden: ");
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("=====================================");
 
-            return new Ellipse (length, width);
-
-            
+            if (shapeType == ShapeType.Ellipse)
+            {
+                Console.WriteLine("=              Ellips               =");
+                Console.WriteLine("=====================================");
+                Console.ResetColor();
+                double length = ReadDoubleGreaterThanZero("\nAnge längden: ");
+                double width = ReadDoubleGreaterThanZero("Ange bredden: ");
+                return new Ellipse(length, width);
+            }
+            else
+            {
+                Console.WriteLine("=             Rektangel             =");
+                Console.WriteLine("=====================================");
+                Console.ResetColor();
+                double length = ReadDoubleGreaterThanZero("\nAnge längden: ");
+                double width = ReadDoubleGreaterThanZero("Ange bredden: ");
+                return new Rectangle(length, width);
+            }
         }
 
-        // Method should receive the string argument being presented upon prompting the user to enter a shape's values. The method should return a double value greater 
-        // than 0 and if the value cannot be interpreted like such, an error message should be shown and the user given a new chance to enter a valid value.
         private static double ReadDoubleGreaterThanZero(string prompt)
         {   
             while (true)
@@ -92,12 +106,9 @@ namespace _1DV402.S2.L03A
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("\nFEL! Ange ett flyttal större än 0.\n");
                 Console.ResetColor();
-                
             }
-            
         }
 
-        // Simply presenting the menu, no readline allowed.
         private static void ViewMenu()
         {
             Console.Clear();
@@ -117,11 +128,16 @@ namespace _1DV402.S2.L03A
             Console.ResetColor();
         }
 
-        // To present a shape's details. Upon being called a reference to the relevant object is being received. 
-        // The ToString method is being used to present the shape and its details.
         private static void ViewShapeDetail(Shape shape)
         {
-
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n=====================================");
+            Console.WriteLine("=             Detaljer              =");
+            Console.WriteLine("=====================================\n");
+            Console.ResetColor();
+            Console.WriteLine(shape.ToString());
+            Console.WriteLine("\n=====================================\n");
         }
     }
 }
